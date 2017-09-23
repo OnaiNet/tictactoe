@@ -1,0 +1,48 @@
+<html>
+<head>
+	<title>Tic Tac Toe</title>
+	<style type="text/css">
+		* { font-family: Arial; }
+		.cell {
+			width: 30%;
+			display: block;
+			height: 30%;
+			float: left;
+			border: 1px solid black;
+			font-size: 48pt;
+			text-align: center;
+		}
+	</style>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="tictactoe.js"></script>
+</head>
+<body>
+
+	<div class="cell empty">X</div>
+	<div class="cell empty"></div>
+	<div class="cell empty"></div>
+	<div class="cell">O</div>
+	<div class="cell empty"></div>
+	<div class="cell empty"></div>
+	<div class="cell empty">X</div>
+	<div class="cell empty">O</div>
+	<div class="cell empty"></div>
+
+	<div>It is <span id="turn"></span>'s turn</div>	
+
+	<script type="text/javascript">
+		var whoseTurn = 'X';
+
+		$('.cell.empty').click(function() {
+			// which cell? = $(this).index()
+			
+		});
+
+		var showTurn = function() {
+			$('#turn').html(whoseTurn);
+		};
+
+		showTurn();
+	</script>
+</body>
+</html>

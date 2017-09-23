@@ -6,7 +6,7 @@ var cells = [
 
 var boardFull = 0b111111111;
 
-/// Test...   null means nobody has gone there yet
+/*// Test...   null means nobody has gone there yet
 cells = [
 	'X', 'O', 'O',
 	'X', 'X', 'O',
@@ -21,7 +21,6 @@ var winPatterns = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5,
 	});
 	return sum;
 });
-
 
 var checkStatus = function() {
 	var xSum = 0, oSum = 0;
@@ -50,7 +49,7 @@ var checkStatus = function() {
 	console.log('The battle continues...');
 };
 
-//console.log(cells);
-//console.log(winPatterns);
+console.log(cells);
+console.log(winPatterns);
 
 checkStatus();
