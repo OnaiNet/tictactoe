@@ -101,47 +101,29 @@ var drawWinner = function(pattern) {
 	context.clearRect(0, 0, canvas.width, canvas.height);
 	context.beginPath();
 
-	console.log('pattern = ' + pattern);
-
 	var bitsFound = 0;
 	var coordinates = [];
 
 	for (var bit = 0; bit < 9; bit++) {
 		var bitValue = Math.pow(2, bit);
 		if ((pattern & bitValue) === bitValue) {
-			console.log('bit = ' + bit + ', bitValue = ' + bitValue);
 			var row = Math.floor(bit / 3);
 			var column = (bit % 3);
 			coordinates.push([column, row]);
-			console.log('row = ' + row + ', column = ' + column);
-			/*
-			var x = (300 / 3) * column - (100 / 2);
-			var y = (300 / 3) * row - (100 / 2);
-			if (bitsFound++ === 0) {
-				context.moveTo(x, y);
-			} else {
-				context.lineTo(x, y);
-				context.stroke();
-			}
-			*/
 		}
 	}
 	var cellWidth = canvas.width / 3;
 	var cellHeight = canvas.height / 3;
-	var x1 = cellWidth * coordinates[0][0] + ((coordinates[0][0] - coordinates[2][0]) * cellWidth / 2) + cellWidth;
-	var y1 = cellHeight * coordinates[0][1] + ((coordinates[0][1] - coordinates[2][1]) * cellHeight / 2) + cellHeight;
-	var x2 = cellWidth * coordinates[2][0] + ((coordinates[2][0] - coordinates[0][0]) * cellWidth / 2);
-	var y2 = cellHeight * coordinates[2][1] + ((coordinates[2][1] - coordinates[0][1]) * cellHeight / 2);
-	//x1 = cellWidth * x1 + cellWidth * (x2 - x1);
+	var x1 = cellWidth * coordinates[0][0] + (((coordinates[0][0] - coordinates[2][0]) / 2 + 1) * cellWidth / 2);
+	var y1 = cellHeight * coordinates[0][1] + (((coordinates[0][1] - coordinates[2][1]) / 2 + 1) * cellHeight / 2);
+	var x2 = cellWidth * coordinates[2][0] + (((coordinates[2][0] - coordinates[0][0]) / 2 + 1) * cellWidth / 2);
+	var y2 = cellHeight * coordinates[2][1] + (((coordinates[2][1] - coordinates[0][1]) / 2 + 1) * cellHeight / 2);
 	context.moveTo(x1, y1);
 	context.lineTo(x2, y2);
 	context.strokeStyle = '#F00';
 	context.lineWidth = 6;
 	context.lineCap = 'round';
 	context.stroke();
-	console.log('x1 = ' + x1 + ', y1 = ' + y1 + ', x2 = ' + x2 + ', y2 = ' + y2);
-	console.log(coordinates);
-
 };
 
 startGame();
