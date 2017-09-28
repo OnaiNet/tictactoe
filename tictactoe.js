@@ -1,9 +1,5 @@
-var cells = [
-	null, null, null, 
-	null, null, null, 
-	null, null, null
-];
-
+var players;
+var cells;
 var boardFull = 0b111111111;
 
 /*// Test...   null means nobody has gone there yet
@@ -33,23 +29,64 @@ var checkStatus = function() {
 	for (var x = 0; x < winPatterns.length; x++) {
 		var goal = winPatterns[x];
 		if ((xSum & goal) === goal) {
-			console.log('X wins!');
+			gameOver('X wins!');
 			return;
 		} else if ((oSum & goal) === goal) {
-			console.log('O wins!');
+			gameOver('O wins!');
 			return;
 		}
 	}
 
 	if ((xSum + oSum) === boardFull) {
-		console.log('Stalemate!');
+		gameOver('Stalemate!');
 		return;
 	}
 
+	// Swap turns
+	showTurn();
 	console.log('The battle continues...');
 };
 
-console.log(cells);
-console.log(winPatterns);
+var gameOver = function(msg) {
+	$('#status').html(msg);
 
-checkStatus();
+	// Unbind cell events since game is over!
+	$('.cell').each(function () {
+		$(this).unbind();
+	});
+};
+
+var startGame = function() {
+	$('.cell').each(function () {
+		$(this).removeClass('selected').html('');
+	});
+
+	players = ['X', 'O'];
+	cells = [
+		null, null, null, 
+		null, null, null, 
+		null, null, null
+	];
+
+	$('#status').html('Current turn: <span id="turn"><span>');
+	bindCells();
+	showTurn();
+};
+
+var bindCells = function() {
+	$('.cell').click(function() {
+		var player = players[0];
+		// Set the cell contents and unbind the cell
+		$(this).html(player).addClass('selected').unbind();
+		// Mark the appropriate cell
+		cells[$(this).index()] = player;
+		players = players.reverse();
+		checkStatus();
+	});
+};
+
+var showTurn = function() {
+	$('#turn').html(players[0]);
+};
+
+startGame();
