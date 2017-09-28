@@ -94,7 +94,7 @@ var showTurn = function() {
 
 var drawWinner = function(pattern) {
 	$('#winner').show();
-    var canvas = $('#winner').get(0);
+	var canvas = $('#winner').get(0);
 	var context = canvas.getContext('2d');
 	canvas.width = 300;
 	canvas.height = 300;
